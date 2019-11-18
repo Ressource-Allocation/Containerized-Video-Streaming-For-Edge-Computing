@@ -1,0 +1,9 @@
+Client installation (web page & vlcplayer for tests): 
+----------------------------------------------------
+Creating web server by using an nginx server basic docker image. 
+Start the image with : docker run --name nginx -d -p 80:80 nginx
+Enter image shell : docker exec -it nginx bash
+update the image with : apt-get update then install vim & wget
+Add an html page in Directory : /usr/share/nginx/html and name it vod.html
+add the following html code in vod.html
+Open the following link : localhost/vod.html to read a video. 
