@@ -9,7 +9,7 @@ Add an html page in Directory : /usr/share/nginx/html and name it player.html
 add the html code in player.html for video.js player for HLS 
 Open the following link : localhost/player.html to read a video. 
 
-//TO DONE: 
+//TO DO: 
 - get the list of all tracks published in the cdn & possibility to play any video published
 - add a research function : put the name of the video to play, if the video is not published on the CDN => request redirected to the Cloud.
 - create a customized docker image of nginx
@@ -24,3 +24,6 @@ CDN Creation
 - add a code for a node server that will serve m3u8 files to the hls player
 - run server
 - get a video with @ip:8080/video_sample.m3u8
+
+//TO DO: 
+in progress ...
