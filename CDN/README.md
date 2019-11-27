@@ -4,8 +4,9 @@ This node server will serve up the m3u8 files to an HLS compatible client (Chrom
 
 ## Using
 
+```sh
 node server.js
-
+```
  * Access localhost:PORT/playlist_name.m3u8 to get the file.
  * Access localhost:PORT/list to get the list of the m3u8 playlists availble in catalogue (to be improved/ parse m3u8 extensions only).
  
