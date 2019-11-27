@@ -1,4 +1,4 @@
-## HLS streaming from node
+## NODE JS Server/middleware for serving HTTP Live Streaming (HLS) compatible media streams.
 Generate your .m3u8 playlist using tools in the /Converting directory and place them in catalogue directory.
 This node server will serve up the m3u8 files to an HLS compatible client (Chrome).  
 
