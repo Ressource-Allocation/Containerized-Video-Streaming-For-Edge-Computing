@@ -10,3 +10,6 @@ node server.js
  * Access localhost:PORT/playlist_name.m3u8 to get the file.
  * Access localhost:PORT/list to get the list of the m3u8 playlists availble in catalogue (to be improved/ parse m3u8 extensions only).
  
+
+
+When this node server will be complete it will be incuded in an docker image.
