@@ -5,7 +5,7 @@ This node server will serve up the m3u8 files to an HLS compatible client (Chrom
 ## Using
 
 ```sh
-node server.js
+node cdn.js
 ```
  * Access **localhost:PORT**  to show the home page with the list of available videos on the CDN catalogue. 
  * Access **localhost:PORT/playlist_name.m3u8** to get a video/playlist by name.
