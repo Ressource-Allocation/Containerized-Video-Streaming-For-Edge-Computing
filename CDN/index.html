@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Node.js Web Server For Serving HLS files</title>
+
+
+</head>
+
+<body>
+  <h3> Node.js Web Server For Serving HLS files</h3>
+  <h4> FIPA PROJECT : Containerized Video Streaming For Edge Computing</h4><br>
+ 
+  <h4> The videos available on the CDN : </h4>
+  <ol id="catalogue"></ol>
+  <script>
+      var catalogueDOM = document.getElementById('catalogue');
+      showAvailablePlaylists();
+
+      function showAvailablePlaylists(){
+        let xmlrequest = new XMLHttpRequest();
+        xmlrequest.open('GET', '/list', true);
+        xmlrequest.onreadystatechange = function(){
+          if(xmlrequest.readyState === 4){
+            if(xmlrequest.status === 200){
+              let playlists = JSON.parse(xmlrequest.responseText);
+              let playlistsHTML = ""
+              for(var i=0; i<playlists.length; i++){
+                playlistsHTML = playlistsHTML + "<li> <a href='/catalogue/" + playlists[i] +"'>" + playlists[i] + "</a></li>"
+              }
+              catalogueDOM.innerHTML = playlistsHTML;
+            }else{
+            }
+          }
+        }
+        xmlrequest.send();
+      } 
+  </script>
+</body>
+</html>
