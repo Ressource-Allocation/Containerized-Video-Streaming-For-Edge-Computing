@@ -5,6 +5,7 @@
 
 To be used with nginx docker image.
 For now use a normal nginx image. A customized one will be created with the player.html.
+Plays random videos from a declared playlist. 
 
  * Create web server:   docker run --name nginx -d -p 80:80 nginx
  * Run container:   docker run --name nginx -d -p 80:80 nginx
