@@ -85,7 +85,7 @@
       }],
       poster: 'http://media.w3.org/2010/05/video/poster.png'
     }];
-   
+   <!--video js player with fluid mode-->
     var player = videojs(document.querySelector('video'), {
       inactivityTimeout: 0,  fluid: true
     });
@@ -102,9 +102,11 @@
     ], function(e) {
       videojs.log('player saw "' + e.type + '"');
     });
+    <!-playlist ad video list declared-->
     player.playlist(videoList);
     player.playlist.repeat(true);
     player.playlist.shuffle({rest: true});
+    <!-repeat playlst / random playlist-->
     document.querySelector('.previous').addEventListener('click', function() {
       player.playlist.previous();
     });
