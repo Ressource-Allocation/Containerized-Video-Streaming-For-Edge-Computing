@@ -3,9 +3,9 @@ Easy Cheat Sheet for Docker
 HOW DOES IT WORK (SIMPLIFIED)
 
 - You build a docker image aka the configuration of your containers from which you will create your containers
-- To each containers will be assigned a default name if not precised in parameters and an hexa ID
+- To each containers will be assigned a default name if not precised in parameters and an hexa ID from which you can stop/start container
 - Docker uses linux OS to work and give acces to resources to containers, if you use Docker Desktop app for Windows, it will install a linux distribution
-
+- Once deleted, a container will loose everything (files, configuration, etc.)
 
 COMMANDS
 
@@ -13,5 +13,6 @@ COMMANDS
 - To search for a container on the Docker Hub: docker search <name to search>
 - To get a container from the Docker Hub: docker pull <name to pull>
 - To run a container: docker run [options] <name of the image from which to run the container>
-- To get access to a container's shell: docker exec <name of the container> /bin/bash
+- To get access to a container's shell: docker exec <name of the container> /bin/bash (or any other shell)
 - To copy a file from the host to a container: docker cp <local path> <name of the container>:<path on your container>
+- To get help for any docker level: docker <level> --help
