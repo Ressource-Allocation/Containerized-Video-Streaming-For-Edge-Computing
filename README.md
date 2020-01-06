@@ -14,7 +14,7 @@ To study this aspect, we will deploy a VOD (Video On Demand) node that will do A
 
 INSTALLATION
 
-We will use  Docker containers to deploy our nodes. To install Docker, see [Docker's website](https://www.docker.com/)
+We will use  Docker containers to deploy our nodes. To install Docker, see [Docker's website](https://www.docker.com/). 
 We will use Kubernetes to orchestrates our nodes.
 
 We will use a customed Node.js container as our VOD's node:
@@ -22,6 +22,6 @@ We will use a customed Node.js container as our VOD's node:
 
 RESOURCES
 
-[Node.js](https://nodejs.org/en/about/)
-[Nginx](https://www.nginx.com/)
-[VOD tutorial](https://selimatmaca.com/index.php/live-streaming?fbclid=IwAR0KnwW_2ctxplcA-JTfVU6rBrngZdmpCHoiYpAQses_os5REMfp_0Oy_0E)
+*[Node.js](https://nodejs.org/en/about/)
+*[Nginx](https://www.nginx.com/)
+*[VOD tutorial](https://selimatmaca.com/index.php/live-streaming?fbclid=IwAR0KnwW_2ctxplcA-JTfVU6rBrngZdmpCHoiYpAQses_os5REMfp_0Oy_0E)
