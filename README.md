@@ -22,6 +22,6 @@ We will use a customed Node.js container as our VOD's node:
 
 RESOURCES
 
-*[Node.js](https://nodejs.org/en/about/)
-*[Nginx](https://www.nginx.com/)
-*[VOD tutorial](https://selimatmaca.com/index.php/live-streaming?fbclid=IwAR0KnwW_2ctxplcA-JTfVU6rBrngZdmpCHoiYpAQses_os5REMfp_0Oy_0E)
+-[Node.js](https://nodejs.org/en/about/)
+-[Nginx](https://www.nginx.com/)
+-[VOD tutorial](https://selimatmaca.com/index.php/live-streaming?fbclid=IwAR0KnwW_2ctxplcA-JTfVU6rBrngZdmpCHoiYpAQses_os5REMfp_0Oy_0E)
