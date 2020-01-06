@@ -1,0 +1,17 @@
+Easy Cheat Sheet for Docker
+
+HOW DOES IT WORK (SIMPLIFIED)
+
+- You build a docker image aka the configuration of your containers from which you will create your containers
+- To each containers will be assigned a default name if not precised in parameters and an hexa ID
+- Docker uses linux OS to work and give acces to resources to containers, if you use Docker Desktop app for Windows, it will install a linux distribution
+
+
+COMMANDS
+
+- To connect to your docker account: docker login
+- To search for a container on the Docker Hub: docker search <name to search>
+- To get a container from the Docker Hub: docker pull <name to pull>
+- To run a container: docker run [options] <name of the image from which to run the container>
+- To get access to a container's shell: docker exec <name of the container> /bin/bash
+- To copy a file from the host to a container: docker cp <local path> <name of the container>:<path on your container>
