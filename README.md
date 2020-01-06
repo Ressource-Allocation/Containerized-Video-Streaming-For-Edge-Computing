@@ -14,8 +14,11 @@ To study this aspect, we will deploy a VOD (Video On Demand) node that will do A
 
 INSTALLATION
 
-We will use [Docker's](https://www.docker.com/) containers to deploy our nodes.
+We will use  Docker containers to deploy our nodes. To install Docker, see [Docker's website](https://www.docker.com/)
 We will use Kubernetes to orchestrates our nodes.
+
+We will use a customed Node.js container as our VOD's node:
+(insert our image here)
 
 RESOURCES
 
