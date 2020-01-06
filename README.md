@@ -20,6 +20,8 @@ We will use Kubernetes to orchestrates our nodes.
 We will use a customed Node.js container as our VOD's node:
 (insert our image here)
 
+Node.js allow us to deploy network applications that support multiple many concurrent connections. If the node isn't working, it will sleep, which saves up resources; furthermore, the node.js isn't deadlockable, and that means the process can be scalable.
+
 RESOURCES
 
 - [Node.js](https://nodejs.org/en/about/)
