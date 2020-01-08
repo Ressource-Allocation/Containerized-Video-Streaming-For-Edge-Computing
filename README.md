@@ -1,6 +1,6 @@
 # Containerized-Video-Streaming-For-Edge-Computing
 
-INTRODUCTION
+**INTRODUCTION**
 
 In this project, we will deploy a containerized CDN (Content Delivery Network) Edge node in order to study how to dynamically allocate resources (memory, CPU...) between CDPs (Content Delivery Provider), such as Netflix, Amazon Prime, etc.
 
@@ -12,17 +12,21 @@ This brings up a problematic for the ISP; how to allocate resources between each
 
 To study this aspect, we will deploy a VOD (Video On Demand) node that will do ABR (Adaptive Bit Rate) streaming that will emulate a CDP node. As such, a node will represent one CPD.
 
-INSTALLATION
+**INSTALLATION**
 
 We will use  Docker containers to deploy our nodes. To install Docker, see [Docker's website](https://www.docker.com/). 
 We will use Kubernetes to orchestrates our nodes.
 
 We will use a customed Node.js container as our VOD's node:
+```
 (insert our image here)
+docker pull 
+docker pull
+```
 
 Node.js allow us to deploy network applications that support multiple many concurrent connections. If the node isn't working, it will sleep, which saves up resources; furthermore, the node.js isn't deadlockable, and that means the process can be scalable.
 
-RESOURCES
+**RESOURCES**
 
 - [Node.js](https://nodejs.org/en/about/)
 - [Nginx](https://www.nginx.com/)
