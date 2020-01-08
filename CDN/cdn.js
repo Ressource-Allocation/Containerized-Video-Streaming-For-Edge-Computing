@@ -1,5 +1,5 @@
 //Web server node js => Serve HLS files
-//Author : N.B
+//Author : A.M
 //browse to to eg. http://localhost:8000 , http://localhost:8000/list , http://localhost:8000/playlist_name.m3u8
 
 var http = require('http');
