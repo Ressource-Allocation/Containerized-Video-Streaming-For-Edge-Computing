@@ -1,4 +1,5 @@
 **What it does**
+
 This script is used to transcode a video into a manifest of all of its possible resolutions.
 In our architecture, each time a video is moved to the VOD server, it is then transcoded into all resolutions.
 This is what we call static transcoding.
