@@ -1,9 +1,15 @@
-running:
+**What it does**
+This script is used to transcode a video into a manifest of all of its possible resolutions.
+In our architecture, each time a video is moved to the VOD server, it is then transcoded into all resolutions.
+This is what we call static transcoding.
+
+
+**running:**
 ```
 bash create-vod-hls.sh example.mp4
 ```
 
-Produce:
+**Produce:**
 ```text
     example/
       |- playlist.m3u8
