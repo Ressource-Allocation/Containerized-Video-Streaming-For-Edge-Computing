@@ -1,13 +1,13 @@
-Easy Cheat Sheet for Docker
+**Easy Cheat Sheet for Docker**
 
-HOW DOES IT WORK (SIMPLIFIED)
+**HOW DOES IT WORK (SIMPLIFIED)**
 
 - You build a docker image aka the configuration of your containers from which you will create your containers
 - To each containers will be assigned a default name if not precised in parameters and an hexa ID from which you can stop/start container
 - Docker uses linux OS to work and give acces to resources to containers, if you use Docker Desktop app for Windows, it will install a linux distribution
 - Once deleted, a container will loose everything (files, configuration, etc.)
 
-COMMANDS
+**COMMANDS**
 
 - To connect to your docker account: docker login
 - To search for a container on the Docker Hub: docker search <name to search>
@@ -16,3 +16,13 @@ COMMANDS
 - To get access to a container's shell: docker exec <name of the container> /bin/bash (or any other shell)
 - To copy a file from the host to a container: docker cp <local path> <name of the container>:<path on your container>
 - To get help for any docker level: docker <level> --help
+
+**HOW TO CREATE YOUR OWN IMAGE**
+Make a directory for your project
+In this directory, write in a file called "Dockerfile" the instructions that you need, the essential beeing:
+"FROM node:latest"    => l'image a créer se basera sur la dernière version de l'image "node" (qui doit avoir été pull)
+
+In this file, you add commands that you need to run on the image (add packages etc.).
+
+Then you need to build your image:
+docker build -t my-app .      => the -t option allows to name the image (the tag to be precise) et the dot tells where the Dockerfile is located
