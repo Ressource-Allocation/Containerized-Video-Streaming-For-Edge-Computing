@@ -29,7 +29,9 @@ sudo yum-config-manager \
     
  sudo yum install docker-ce docker-ce-cli containerd.io
  ```
- You will need to install wget and bc:
+ Note that this installation doesn't need a Docker Hub account (Docker for Desktop requires one) but if you plan on using Docker Hub Registries and make your own docker images, you may want to create one.
+
+You will need to install wget and bc:
  ```
  sudo yum install wget 
  sudo yum install bc
