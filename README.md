@@ -36,7 +36,16 @@ You will need to install wget and bc:
  sudo yum install wget 
  sudo yum install bc
  ```
-**INSTALLATION**
+
+Now we need ffmpeg, that we will use to create our playlist:
+if you're using CentOS like us, ffmpeg has no repository at the moment, to install this you can refer to [this](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/) guide:
+```
+sudo yum install epel-release
+sudo rpm -v --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
+sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+sudo yum install ffmpeg ffmpeg-devel
+```
+**HOW TO USE**
 
 We will use  Docker containers to deploy our nodes. To install Docker, see [Docker's website](https://www.docker.com/). 
 We will use Kubernetes to orchestrates our nodes.
