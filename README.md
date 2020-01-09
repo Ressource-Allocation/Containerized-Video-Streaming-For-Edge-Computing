@@ -45,6 +45,11 @@ sudo rpm -v --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
 sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
 sudo yum install ffmpeg ffmpeg-devel
 ```
+Or if you use any other distribution, use your standard packet manager like:
+```
+apt install ffmpeg
+```
+
 **HOW TO USE**
 
 We will use  Docker containers to deploy our nodes. To install Docker, see [Docker's website](https://www.docker.com/). 
