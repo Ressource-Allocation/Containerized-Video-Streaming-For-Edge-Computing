@@ -18,49 +18,58 @@ We used two Ubuntu virtual machines, one serving as a edge node and one serving 
 
 We recommand not to use CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository). 
 
-**How to install the server yourself**
+
+** Installation step by step **
 
 
-Because we used Ubuntu, commands may changes (we used yum as a package manager).
+Because we used Ubuntu, commands may changes (we used yum as a package manager). As both servers have the same configuration, you need to do it on both machines. We recommand using a tool with a multi-execution split screen mode, like [MobaXterm](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiykv6Sh4HnAhVFxIUKHV3aBtAQFjAAegQICBAC&url=https%3A%2F%2Fmobaxterm.mobatek.net%2F&usg=AOvVaw2p74aXHoSZjuU9aYznA2Af) or equivalent (to allow you to execute a command on two screens directly).
 
-On each VM, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/centos/) docker installation tutorial):
+On each VM, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/ubuntu/ docker) installation tutorial):
 ```
-sudo apt update
-sudo apt install docker
-
-sudo yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
     
- sudo yum install docker-ce docker-ce-cli containerd.io
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
  ```
  Note that this installation doesn't need a Docker Hub account (Docker for Desktop requires one) but if you plan on using Docker Hub Registries and make your own docker images, you may want to create one.
 
-You will need to install wget (to download a video to make our catalog) and bc (dependancy of create_vod_playlist.sh):
- ```
- sudo yum install wget 
- sudo yum install bc
- ```
+We will pull an ubuntu docker image:
+```
+sudo docker pull ubuntu
+```
+Then we will run this image in a container on which we will install packages (even though best practices would be to use a Dockerfile \[we did this after\]:
+```
+sudo docker run -dit -p 8000:80 --name server-hls ubuntu
+sudo docker exec -dit server-hls
+```
 
 Now we need ffmpeg, that we will use to create our playlist (create_vod_playlist.sh):
-if you're using CentOS like us, ffmpeg has no repository at the moment, to install this you can refer to [this](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/) guide:
 ```
-sudo yum install epel-release
-sudo rpm -v --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
-sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
-sudo yum install ffmpeg ffmpeg-devel
-```
-Or if you use any other distribution, use your standard packet manager like:
-```
-apt install ffmpeg
+sudo apt-get install ffmpeg
 ```
 You then need node.js:
 ```
-yum install nodejs
-yum install npm
+apt-get install nodejs
+apt-get install npm
+```
+Install these tools:
+```
+apt-get install ffmpeg
+apt-get install wget
+apt-get install bc
 ```
 
-Download our scripts to your VM:
+Download our scripts to your containers:
 - create_vod_playlist.sh
 - cdn.js
 - request
@@ -86,17 +95,6 @@ Final architecture should be like:
        |___ 
        |___ ...
 ```
-
-**HOW TO USE**
-
-We will use a customed Node.js container as our VOD's node so that it is ready to go:
-```
-(insert our image here)
-docker pull 
-docker pull
-```
-
-Node.js allow us to deploy network applications that support multiple many concurrent connections. If the node isn't working, it will sleep, which saves up resources; furthermore, the node.js isn't deadlockable, and that means the process can be scalable.
 
 **RESOURCES**
 
