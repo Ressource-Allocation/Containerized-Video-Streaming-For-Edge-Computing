@@ -1,6 +1,6 @@
 //Web server node js => Serve HLS files
 //Author : A.M
-//browse to to eg. http://localhost:8000 , http://localhost:8000/list , http://localhost:8000/playlist_name.m3u8
+//browse to to http://<hostname>:PORT/ eg. http://localhost:8000
 
 var http = require('http');
 var fs = require('fs');
@@ -31,6 +31,51 @@ function sendIndexHtml(response){
 //Send list of files in /catalogue
 function sendListOfFiles(response){
   let uploadDir = path.join(__dirname, 'catalogue');
+  if (!fs.existsSync(uploadDir)){
+    	fs.mkdirSync(uploadDir);
+	}
+  fs.readdir(uploadDir, (err, files) => {
+    if(err){
+      console.log(err);
+      response.writeHead(400, {'Content-Type': 'application/json'});
+      response.write(JSON.stringify(err.message));
+      response.end();
+    }else{
+	//Deleting the files with no m3u8 extension from the list
+	for( var i = 0; i < files.length; i++){ 
+	   if ( path.extname(files[i]) != ".m3u8") {
+	     files.splice(i, 1); 
+	     i--;
+	   }
+	}
+      //create json objects
+        var dict = {}
+	var sources = []
+        var videolist = []
+	for( var i = 0; i < files.length; i++){ 
+		dict["src"] = files[i]
+		dict["type"] = "temp"
+		sources.push(dict)	
+	}
+      console.log(JSON.stringify(dict))
+      console.log(JSON.stringify(sources))
+      for ( var i = 0; i < sources.length; i++){ 
+		videolist["sources"] = sources[i]	
+	}
+   console.log(JSON.stringify(videolist))
+
+      response.writeHead(200, {'Content-Type': 'application/json'});
+      response.write(JSON.stringify(files));
+      response.end();
+    }
+  })
+}
+//Send playlist of videos available on the cdn
+function sendCdnPlaylist(response){
+  let uploadDir = path.join(__dirname, 'catalogue');
+  if (!fs.existsSync(uploadDir)){
+    	fs.mkdirSync(uploadDir);
+	}
   fs.readdir(uploadDir, (err, files) => {
     if(err){
       console.log(err);
@@ -67,13 +112,25 @@ function PageNotFound(response, pagename){
 	response.write('This is not the page you are looking for.');
 	response.end(); 
 }
+
+// open the file in writing mode, adding a callback function where we do the actual writing
+function OpenAndWrite(path, buffer){
+	fs.open(path, 'a', function(err, fd) {
+	    if (err) {
+		throw 'could not open file: ' + err;
+	    }
+	 fs.writeFile(fd, new Buffer(buffer), (err) => {
+    		if (err) throw err;
+	}); 
+	});
+
+}
 //Create web server
 http.createServer(function (request, response) {
 	var uri = url.parse(request.url).pathname;
 
 	if (uri == '/' || uri == '/index.html' ) {
 		sendIndexHtml(response);
-
 	}else if (uri === '/list'){
 		sendListOfFiles(response)
 		console.log('Sending list of files in /catalogue');
@@ -86,10 +143,14 @@ http.createServer(function (request, response) {
 				}
 			});
 		} else {
+			
 			fs.exists(filename, function (exists) {
 			if (!exists) {
 				FileNotFound(response, filename)	
 			} else{
+			var now = new Date();
+			var jsonDate = now.toJSON();
+                        OpenAndWrite("stat_file.txt", jsonDate + ";" +filename +'\n')
 			console.log('Sending file: ' + filename);
 			switch (path.extname(uri)) {
 			case '.m3u8':
