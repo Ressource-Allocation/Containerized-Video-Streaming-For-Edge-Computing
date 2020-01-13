@@ -67,16 +67,19 @@ Now we need ffmpeg, that we will use to create our playlist (create_vod_playlist
 ```
 apt-get install ffmpeg
 ```
-You then need node.js:
-```
-apt-get install nodejs
-apt-get install npm
-```
 Install these tools:
 ```
 apt-get install ffmpeg
 apt-get install wget
 apt-get install bc
+apt-get install curl
+```
+
+You then need node.js:
+```
+curl -sL https://deb.nodesource.com/setup_13.x | bash -
+apt-get install -y nodejs
+npm install fluent-ffmpeg
 ```
 
 Download our scripts to your containers:
