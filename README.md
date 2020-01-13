@@ -14,18 +14,19 @@ To study this aspect, we will deploy a VOD (Video On Demand) node that will do A
 
 **REQUIREMENTS**
 
-We used two CentOS virtual machines, one serving as a edge node and one serving as a cloud node; we used virtual machines to have to different IP addresses and to be able to catch trafic between the client and the server. So you'll need to install those VMs yourself, with a distribution that fits your needs.
+We used two Ubuntu virtual machines, one serving as a edge node and one serving as a cloud node; we used virtual machines to have to different IP addresses and to be able to catch trafic between the client and the server. So you'll need to install those VMs yourself, with a distribution that fits your needs.
+
+We recommand not to use CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository). 
 
 **How to install the server yourself**
 
 
-Because we used CentOS, commands may changes (we used yum as a package manager).
+Because we used Ubuntu, commands may changes (we used yum as a package manager).
 
 On each VM, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/centos/) docker installation tutorial):
 ```
-sudo yum install -y yum-utils \
-  device-mapper-persistent-data \
-  lvm2
+sudo apt update
+sudo apt install docker
 
 sudo yum-config-manager \
     --add-repo \
