@@ -11,13 +11,17 @@ In real world, CDP already use physical servers in the access network, but as CD
 This brings up a problematic for the ISP; how to allocate resources between each CDP nodes ?
 
 To study this aspect, we will deploy a VOD (Video On Demand) node that will do ABR (Adaptive Bit Rate) streaming that will emulate a CDP node. As such, a node will represent one CPD.
+
 **REQUIREMENTS**
 
-We used two CentOS virtual machines, one serving as a edge node and one serving as a cloud node; we used virtual machines to have to different IP addresses. So you'll need to install those yourself, with a distribution that fits your needs.
+We used two CentOS virtual machines, one serving as a edge node and one serving as a cloud node; we used virtual machines to have to different IP addresses and to be able to catch trafic between the client and the server. So you'll need to install those VMs yourself, with a distribution that fits your needs.
+
+**How to install the server yourself**
+
 
 Because we used CentOS, commands may changes (we used yum as a package manager).
 
-On each one, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/centos/) docker installation tutorial):
+On each VM, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/centos/) docker installation tutorial):
 ```
 sudo yum install -y yum-utils \
   device-mapper-persistent-data \
@@ -31,13 +35,13 @@ sudo yum-config-manager \
  ```
  Note that this installation doesn't need a Docker Hub account (Docker for Desktop requires one) but if you plan on using Docker Hub Registries and make your own docker images, you may want to create one.
 
-You will need to install wget and bc:
+You will need to install wget (to download a video to make our catalog) and bc (dependancy of create_vod_playlist.sh):
  ```
  sudo yum install wget 
  sudo yum install bc
  ```
 
-Now we need ffmpeg, that we will use to create our playlist:
+Now we need ffmpeg, that we will use to create our playlist (create_vod_playlist.sh):
 if you're using CentOS like us, ffmpeg has no repository at the moment, to install this you can refer to [this](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/) guide:
 ```
 sudo yum install epel-release
@@ -49,6 +53,23 @@ Or if you use any other distribution, use your standard packet manager like:
 ```
 apt install ffmpeg
 ```
+You then need node.js:
+```
+yum install nodejs
+yum install npm
+```
+
+Download our scripts to your VM:
+- create_vod_playlist.sh
+- cdn.js
+- request
+
+If you want ot change the file path, please modify cdn.js script.
+To start the node.js server, you should use:
+```
+node cdn.js
+```
+
 To allow incoming trafic from outside the localhost to the node.js server, we need to allow incoming trafic in iptables:
 ```
 iptables -I INPUT -p tcp -m tcp --dport 8000 -j ACCEPT
@@ -57,10 +78,7 @@ Note: if you want to change the port, you need to modify the port number in 'cdn
 
 **HOW TO USE**
 
-We will use  Docker containers to deploy our nodes. To install Docker, see [Docker's website](https://www.docker.com/). 
-We will use Kubernetes to orchestrates our nodes.
-
-We will use a customed Node.js container as our VOD's node:
+We will use a customed Node.js container as our VOD's node so that it is ready to go:
 ```
 (insert our image here)
 docker pull 
