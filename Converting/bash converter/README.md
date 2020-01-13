@@ -4,7 +4,7 @@ This script is used to transcode a video into a manifest of all of its possible 
 In our architecture, each time a video is moved to the VOD server, it is then transcoded into all resolutions.
 This is what we call static transcoding (opposite to transcoding on the fly, at the user's request).
 
-This code, which is not ours, is open source and can be found on this [GitHub](https://gist.github.com/mrbar42/ae111731906f958b396f30906004b3fa).
+This code, which is not ours, is open source and can be found on this [GitHub](https://gist.github.com/mrbar42/ae111731906f958b396f30906004b3fa). If you want more intel on transcoding, please visit [here](https://docs.peer5.com/guides/production-ready-hls-vod/).
 
 **running:**
 ```
