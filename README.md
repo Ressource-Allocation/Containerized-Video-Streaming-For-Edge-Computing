@@ -18,10 +18,18 @@ To study this aspect, we will deploy a VOD (Video On Demand) node that will do A
 
 We used two Ubuntu virtual machines, one serving as a edge node and one serving as a cloud node; we used virtual machines to have to different IP addresses and to be able to catch trafic between the client and the server. So you'll need to install those VMs yourself, with a distribution that fits your needs.
 
-We recommand not to use CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository). 
+We recommand not to use CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository).
 
 
-** Installation step by step **
+**How to use the docker image**
+
+Once Docker is installed, pull our images and run it.
+To pull the image:
+```
+docker pull 
+```
+
+**Installation step by step**
 
 
 Because we used Ubuntu, commands may changes (we used yum as a package manager). As both servers have the same configuration, you need to do it on both machines. We recommand using a tool with a multi-execution split screen mode, like [MobaXterm](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiykv6Sh4HnAhVFxIUKHV3aBtAQFjAAegQICBAC&url=https%3A%2F%2Fmobaxterm.mobatek.net%2F&usg=AOvVaw2p74aXHoSZjuU9aYznA2Af) or equivalent (to allow you to execute a command on two screens directly).
