@@ -1,5 +1,7 @@
 # Containerized-Video-Streaming-For-Edge-Computing
 
+Brace yourself, this may take a while to read.
+
 **INTRODUCTION**
 
 In this project, we will deploy a containerized CDN (Content Delivery Network) Edge node in order to study how to dynamically allocate resources (memory, CPU...) between CDPs (Content Delivery Provider), such as Netflix, Amazon Prime, etc.
@@ -41,7 +43,7 @@ sudo apt-get install \
     
  sudo apt-get install docker-ce docker-ce-cli containerd.io
  ```
- Note that this installation doesn't need a Docker Hub account (Docker for Desktop requires one) but if you plan on using Docker Hub Registries and make your own docker images, you may want to create one.
+Note that this installation doesn't need a Docker Hub account (Docker for Desktop requires one) but if you plan on using Docker Hub Registries and make your own docker images, you may want to create one.
 
 We will pull an ubuntu docker image:
 ```
@@ -55,7 +57,7 @@ sudo docker exec -dit server-hls
 
 Now we need ffmpeg, that we will use to create our playlist (create_vod_playlist.sh):
 ```
-sudo apt-get install ffmpeg
+apt-get install ffmpeg
 ```
 You then need node.js:
 ```
@@ -70,21 +72,24 @@ apt-get install bc
 ```
 
 Download our scripts to your containers:
-- create_vod_playlist.sh
-- cdn.js
-- request
+```
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Converting/bash%20converter/create-vod-hls.sh
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/cdn.js
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/index.html
+```
+What does these scripts do ?
+- create-vod-hls.sh : creates a m3u8 playlist of multiple resolutions from a source video, 
+- cdn.js : our node.js app, i.e. it creates the HLS server, which use the index.html for presentation.
 
-If you want ot change the file path, please modify cdn.js script.
 To start the node.js server, you should use:
 ```
 node cdn.js
 ```
 
-To allow incoming trafic from outside the localhost to the node.js server, we need to allow incoming trafic in iptables:
+#To allow incoming trafic from outside the localhost to the node.js server, we need to allow incoming trafic in iptables:
 ```
 iptables -I INPUT -p tcp -m tcp --dport 8000 -j ACCEPT
 ```
-Note: if you want to change the port, you need to modify the port number in 'cdn.js' and to expose the port in your docker image.
 
 Final architecture should be like:
 ```
