@@ -77,6 +77,16 @@ iptables -I INPUT -p tcp -m tcp --dport 8000 -j ACCEPT
 ```
 Note: if you want to change the port, you need to modify the port number in 'cdn.js' and to expose the port in your docker image.
 
+Final architecture should be like:
+```
+   ----/
+       |___ create-vod-hls.sh
+       |___ populate-catalogue.sh
+       |___ cdn.js
+       |___ 
+       |___ ...
+```
+
 **HOW TO USE**
 
 We will use a customed Node.js container as our VOD's node so that it is ready to go:
