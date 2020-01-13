@@ -49,6 +49,11 @@ Or if you use any other distribution, use your standard packet manager like:
 ```
 apt install ffmpeg
 ```
+To allow incoming trafic from outside the localhost to the node.js server, we need to allow incoming trafic in iptables:
+```
+iptables -I INPUT -p tcp -m tcp --dport 8000 -j ACCEPT
+```
+Note: if you want to change the port, you need to modify the port number in 'cdn.js' and to expose the port in your docker image.
 
 **HOW TO USE**
 
