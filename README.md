@@ -34,7 +34,7 @@ docker pull
 
 Because we used Ubuntu, commands may changes (we used yum as a package manager). As both servers have the same configuration, you need to do it on both machines. We recommand using a tool with a multi-execution split screen mode, like [MobaXterm](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiykv6Sh4HnAhVFxIUKHV3aBtAQFjAAegQICBAC&url=https%3A%2F%2Fmobaxterm.mobatek.net%2F&usg=AOvVaw2p74aXHoSZjuU9aYznA2Af) or equivalent (to allow you to execute a command on two screens directly).
 
-On each VM, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/ubuntu/ docker) installation tutorial):
+On each VM, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/ubuntu/) docker installation tutorial):
 ```
 sudo apt-get update
 sudo apt-get install \
