@@ -27,6 +27,24 @@ function sendIndexHtml(response){
 	response.end();
   	})
 }
+//TEMP FUNCTION MAYBE TO REMOVE
+
+function sendStatContents(response){
+  let uploadDir = path.join(__dirname, 'stats');
+  if (!fs.existsSync(uploadDir)){
+    	fs.mkdirSync(uploadDir);
+	}
+  var fileLoc = path.resolve(uploadDir);
+  fileLoc = path.join(fileLoc, "generated_stats.txt");
+  console.log(fileLoc)
+
+    var stream = fs.createReadStream(fileLoc);
+    stream.on('error', function(error) {
+    	response.writeHead(404, 'Not Found');
+        response.end();
+        });
+    stream.pipe(response);
+}
 
 //Send list of files in /catalogue
 function sendListOfFiles(response){
@@ -62,7 +80,7 @@ function sendListOfFiles(response){
       for ( var i = 0; i < sources.length; i++){ 
 		videolist["sources"] = sources[i]	
 	}
-   console.log(JSON.stringify(videolist))
+      console.log(JSON.stringify(videolist))
 
       response.writeHead(200, {'Content-Type': 'application/json'});
       response.write(JSON.stringify(files));
@@ -125,6 +143,7 @@ function OpenAndWrite(path, buffer){
 	});
 
 }
+
 //Create web server
 http.createServer(function (request, response) {
 	var uri = url.parse(request.url).pathname;
@@ -134,6 +153,9 @@ http.createServer(function (request, response) {
 	}else if (uri === '/list'){
 		sendListOfFiles(response)
 		console.log('Sending list of files in /catalogue');
+	}else if (uri === '/stats'){
+		sendStatContents(response)
+		console.log('sending stats');
 	}else{
 		var filename = path.join("./", uri);
 		if (path.extname(filename) === "") {
@@ -150,7 +172,7 @@ http.createServer(function (request, response) {
 			} else{
 			var now = new Date();
 			var jsonDate = now.toJSON();
-                        OpenAndWrite("stat_file.txt", jsonDate + ";" +filename +'\n')
+                        OpenAndWrite("stats/generated_stats.txt", filename + "; \t"+ jsonDate + "\n")
 			console.log('Sending file: ' + filename);
 			switch (path.extname(uri)) {
 			case '.m3u8':
