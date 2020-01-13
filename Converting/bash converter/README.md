@@ -6,6 +6,8 @@ This is what we call static transcoding (opposite to transcoding on the fly, at 
 
 This code, which is not ours, is open source and can be found on this [GitHub](https://gist.github.com/mrbar42/ae111731906f958b396f30906004b3fa). If you want more intel on transcoding, please visit [here](https://docs.peer5.com/guides/production-ready-hls-vod/).
 
+This code is used to populate the catalog directory which will contain all videos, with a sub directory for each video with all the transcoded resolutions.
+
 **running:**
 ```
 bash create-vod-hls.sh example.mp4
