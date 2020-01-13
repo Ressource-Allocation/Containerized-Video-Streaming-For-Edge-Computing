@@ -32,13 +32,5 @@ bash create-vod-hls.sh example.mp4
       |- 1080p_001.ts
       |- 1080p_002.ts  
 ```
-```
-   ----/
-       |___ create-vod-hls.sh
-       |___ populate-catalogue.sh
-       |___ cdn.js
-       |___ 
-       |___ ...
-```
 
   
