@@ -57,11 +57,13 @@ We will pull an ubuntu docker image:
 ```
 sudo docker pull ubuntu
 ```
-Then we will run this image in a container on which we will install packages (even though best practices would be to use a Dockerfile \[we did this after\]:
+Then we will run this image in a container on which we will install packages and a video (even though best practices would be to use a Dockerfile \[we did this after\]:
 ```
 sudo docker run -dit -p 8000:8000 --name server-hls ubuntu
+sudo docker cp jellyfish.mp4 server-hls:/
 sudo docker exec -dit server-hls
 ```
+Our video, ```jellyfish.mp4``` can be found [here](http://www.jell.yfish.us/).
 
 Now we need ffmpeg, that we will use to create our playlist (create_vod_playlist.sh):
 ```
@@ -92,12 +94,13 @@ What does these scripts do ?
 - create-vod-hls.sh : creates a m3u8 playlist of multiple resolutions from a source video, 
 - cdn.js : our node.js app, i.e. it creates the HLS server, which use the index.html for presentation.
 
+
 To start the node.js server, you should use:
 ```
 node cdn.js
 ```
 
-#To allow incoming trafic from outside the localhost to the node.js server, we need to allow incoming trafic in your VM:
+Make sure your VM ports are open to allow incoming trafic:
 ```
 ufw allow 8000/tcp
 ```
@@ -108,7 +111,8 @@ Final architecture should be like:
        |___ create-vod-hls.sh
        |___ populate-catalogue.sh
        |___ cdn.js
-       |___ 
+       |___ stats/
+       |         |__stats.txt
        |___ ...
 ```
 
