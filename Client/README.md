@@ -7,10 +7,17 @@ To be used with nginx docker image.
 For now use a normal nginx image. A customized one will be created with the player.html.
 Plays random videos from a declared playlist. 
 
- * Create web server:   docker run --name nginx -d -p 80:80 nginx
- * Run container:   docker run --name nginx -d -p 80:80 nginx
- * Go to directory inside the container : docker exec -it nginx /bin/sh, cd /usr
- * install :  apt-get update && apt-get install wget -y && apt install vim
- * wget https://github-link/index.html -O index.html
- * specify the m3u8 playlist in index.html 
- * open player : localhost/
+
+Pull an nginx image and run it:
+```
+sudo docker run -d -p 80:80 --name nginx nginx
+sudo docker exec -it nginx /bin/bash
+```
+Install on it wget to pull the index.html from our GutHub:
+```
+apt-get update
+apt-get install wget
+wget https://github.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/raw/master/Client/index.html
+cp index.html /usr/share/nginx/
+```
+You can then open the player in a web browser on localhost.
