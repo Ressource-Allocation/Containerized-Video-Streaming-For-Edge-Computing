@@ -59,7 +59,7 @@ sudo docker pull ubuntu
 ```
 Then we will run this image in a container on which we will install packages (even though best practices would be to use a Dockerfile \[we did this after\]:
 ```
-sudo docker run -dit -p 8000:80 --name server-hls ubuntu
+sudo docker run -dit -p 8000:8000 --name server-hls ubuntu
 sudo docker exec -dit server-hls
 ```
 
@@ -97,9 +97,9 @@ To start the node.js server, you should use:
 node cdn.js
 ```
 
-#To allow incoming trafic from outside the localhost to the node.js server, we need to allow incoming trafic in iptables:
+#To allow incoming trafic from outside the localhost to the node.js server, we need to allow incoming trafic in your VM:
 ```
-iptables -I INPUT -p tcp -m tcp --dport 8000 -j ACCEPT
+ufw allow 8000/tcp
 ```
 
 Final architecture should be like:
