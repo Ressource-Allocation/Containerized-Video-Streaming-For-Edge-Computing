@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Node.js Web Server For Serving HLS files</title>
+
+
+</head>
+
+<body>
+  <h3> Node.js Web Server For Serving HLS files</h3>
+  <h4> FIPA PROJECT : Containerized Video Streaming For Edge Computing</h4><br>
+ 
+  <h4> Stats generated on the CDN : </h4>
+  <ol id="stats"></ol>
+<div style="height: 400px">
+<canvas id="myChart"></canvas>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" ></script>
+  <script>
+       var catalogueDOM = document.getElementById('stats');
+       showStats();
+
+      function showStats(){
+        let xmlrequest = new XMLHttpRequest();
+        xmlrequest.open('GET', '/raw_stats', true);
+        xmlrequest.onreadystatechange = function(){
+          if(xmlrequest.readyState === 4){
+            if(xmlrequest.status === 200){
+              let stats = xmlrequest.responseText;
+	      stats = stats.split(";");
+	      var counter360 =0
+	      var counter480 =0
+	      var counter720 =0
+	      var counter1080 =0
+	      stats.forEach(element => {
+	      		element = element.split(",");
+	      		var re1 = new RegExp("^360.*ts$");
+	      		var re2 = new RegExp("^480.*ts$");
+	      		var re3 = new RegExp("^720.*ts$");
+	      		var re4 = new RegExp("^1080.*ts$");
+	      		if (re1.test(element[0].trim(" "))) {
+	      			counter360++;
+	      		}
+	      		if (re2.test(element[0].trim(" "))) {
+	      			counter480++;
+	      		}
+	      		if (re3.test(element[0].trim(" "))) {
+	      			counter720++;
+	      		}
+	      		if (re4.test(element[0].trim(" "))) {
+	      			counter1080++;
+	      		}
+		}); 
+	      if(stats.length === 0){
+		statsHTML =  "The Stat file is empty.<br> You need to play videos with the player to be able to generate stats.</br>"
+		catalogueDOM.innerHTML = statsHTML;
+		}
+	      var ctx = document.getElementById('myChart').getContext('2d');
+	var chart = new Chart(ctx, {
+	    // The type of chart we want to create
+	    type: 'bar',
+	    // The data for our dataset
+	    data: {
+		labels: ['360px', '480px', '720px', '1080px'],
+	  	datasets: [{
+		    label: 'Resolution in pixels',
+		    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+		    borderColor:   'rgba(255, 159, 64, 0.2)',
+		    data: [counter360, counter480, counter720, counter1080]
+		}]
+	    },
+	    // Configuration options go here
+	    options: {
+		responsive : true,
+		 maintainAspectRatio: false,
+		legend: { 
+			position : "top"},
+		title :{
+			display: true,
+			text: "Chart.js CDN statistics"},
+	 	scales: {
+		    yAxes: [{
+		        ticks: {
+		            beginAtZero: true
+		        }, 
+			 scaleLabel:{
+		                    display: true,
+		                    labelString: 'Number of videos',
+		                    fontColor: "#546372"
+		                }
+		    }],
+	 	   xAxes: [{
+		        ticks: {
+		            beginAtZero: true
+		        }, 
+			 scaleLabel:{
+		                    display: true,
+		                    labelString: 'Possible resolutions of the videos on the CDN',
+		                    fontColor: "#546372"
+		                }
+		    }],			
+		}}
+	});
+	    }else{
+          }
+  		}
+        }
+        xmlrequest.send();
+      } 
+	
+  </script>
+</body>
+</html>
