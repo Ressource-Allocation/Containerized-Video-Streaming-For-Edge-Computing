@@ -113,9 +113,12 @@ Final architecture should be like:
        |___ cdn.js
        |___ stats/
        |         |__stats.txt
+       |___ catalogue/
+       |             |__ <video files>
        |___ ...
 ```
-
+The stats directory will hold the streaming statistics that we will analyze.
+The catalogue directory is where our transcoded files and playlist are save.
 **RESOURCES**
 
 - [Node.js](https://nodejs.org/en/about/)
