@@ -30,7 +30,7 @@ To pull the image:
 docker pull 
 ```
 -------------------------------------------------------------------------------------------------------------------------------
-**Installation step by step**
+**Installation of the servers step by step**
 
 Here are the steps:
 - Installing the VMs,
@@ -130,6 +130,23 @@ Final architecture should be like:
 ```
 The stats directory will hold the streaming statistics that we will analyze.
 The catalogue directory is where our transcoded files and playlist are save.
+
+--------------------------------------------------------------------------------------------------------------------------------
+**How to install step by step the streaming client***
+
+Pull an nginx image and run it:
+```
+sudo docker run -d -p 80:80 --name nginx nginx
+sudo docker exec -it nginx /bin/bash
+```
+Install on it wget to pull the index.html from our GutHub:
+```
+apt-get update
+apt-get install wget
+wget https://github.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/raw/master/Client/index.html
+```
+
+
 **RESOURCES**
 
 - [Node.js](https://nodejs.org/en/about/)
