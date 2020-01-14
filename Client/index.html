@@ -4,10 +4,8 @@
 <head>
   <meta charset="utf-8">
   <title>Video JS Player</title> 
-  <link href="/node_modules/video.js/dist/video-js.css" rel="stylesheet">
+  <link href="/dist/video-js.css" rel="stylesheet">
   <link  href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet" /> 
-  <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet"/>  
-  <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet"/>  
   <!-- CSS -->
   <style>
       button{
@@ -64,9 +62,10 @@
    <button class="playrand1" style="background-color:#4e9af1">Play 10 random videos </button>
    <button class="playrand2" style="background-color:#6B8E23">Play 50 random videos </button>
   <!-- Script & Sources -->
-   <script src="https://unpkg.com/video.js/dist/video.js"></script>
-   <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
-   <script src="videojs-playlist.js"></script>
+   <script src="/dist/video.js"></script>
+   <script src="/dist/videojs-http-streaming.js"></script>
+   <script src="/dist/videojs-playlist.js"></script>
+   <script src="/dist/chance.min.js"></script>
    <script>
     <!-- CDN & Cloud playlists-->
     var videoListCDN = [{
