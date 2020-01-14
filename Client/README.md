@@ -3,10 +3,9 @@
 
 ## Using
 
-To be used with nginx docker image.
-For now use a normal nginx image. A customized one will be created with the player.html.
-Plays random videos from a declared playlist. 
 
+We use a local video.js player in a nginx container to display videos from a remote server.
+For now use a normal nginx image. A customized one will be created with the player.
 
 Pull an nginx image and run it:
 ```
@@ -20,4 +19,12 @@ apt-get install wget
 wget https://github.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/raw/master/Client/index.html
 cp index.html /usr/share/nginx/
 ```
-You can then open the player in a web browser on localhost.
+Modify this index.html and replace the IPs by those of your VM servers (you might need to install your favortie text editor);
+```sources: [{
+        src: 'http://localhost:8001/playlist.m3u8',
+        type: 'application/x-mpegURL'
+      }],
+```
+
+If you want more videos, just add another ```sources``` block with the right host and playliste name.
+You can then open the player in a web browser on localhost (it will call the playlist on the serve)r.
