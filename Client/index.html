@@ -114,12 +114,12 @@
     ], function(e) {
       videojs.log('player saw "' + e.type + '"');
     });
-    <!-playlist ad video list declared-->
+    <!--playlist ad video list declared-->
     player.playlist(videoListCDN);
     player.playlist.shuffle({rest: true});
-    <!-functions on click-->
+    <!--functions on click-->
     
-    <!-Button 1-->
+    <!--Button 1-->
     document.querySelector('.play').addEventListener('click', function() {
         var unique = chance.unique(chance.natural,1, {min: 1, max: 100});
             if (unique < 50){
@@ -134,7 +134,7 @@
                     player.playlist.next();
             }
     });
-    <!-Button 2-->
+    <!--Button 2-->
      document.querySelector('.playrand1').addEventListener('click', function() {
         var unique = chance.unique(chance.natural,1, {min: 1, max: 100});
              for (i=0; i<50; i++){
@@ -150,7 +150,7 @@
             }
         }
     });
-    <!-Button 3-->    
+    <!--Button 3-->    
      document.querySelector('.playrand2').addEventListener('click', function() {
         var unique = chance.unique(chance.natural,1, {min: 1, max: 100});
              for (i=0; i<50; i++){
