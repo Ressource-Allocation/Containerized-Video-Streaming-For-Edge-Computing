@@ -11,11 +11,11 @@ Or how do we unsterdand it works:
 - Once deleted, a container will loose everything (files, configuration, etc.)
 
 **COMMANDS**
-- To start Docker: systemctl start docker   (CentOs)
-- To connect to your docker hub account (necessary if you have Docker for Desktop): docker login
-- To search for a container on the Docker Hub: docker search <name to search>
-- To get a container from the Docker Hub: docker pull <name to pull>
-- To run a container: docker run [options] <name of the image from which to run the container>
+- To start Docker in cli: ```systemctl start docker   ```
+- To connect to your docker hub account (necessary if you have Docker for Desktop): ```docker login```
+- To search for a container on the Docker Hub: ```docker search <name to search>```
+- To get a container from the Docker Hub: ```docker pull <name to pull>```
+- To run a container: ```docker run [options] <name of the image from which to run the container>```
 - To get access to a container's shell: docker exec -it <name of the container> /bin/bash (or any other shell)
 - To copy a file from the host to a container: docker cp <local path> <name of the container>:<path on your container>
 - To get help for any docker level: docker <level> --help
