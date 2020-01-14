@@ -22,8 +22,8 @@ Or how do we unsterdand it works:
 - to clean docker from unused images, networks, containers not running:  docker system prune
 
 **OPTIONS**
-- docker run -p 8080:80   : redirect trafic from port 8080 to the container's port 80  <external>:<internal>
-- docker run -d : to let your application turn in backend (and not close once its job's done)
+- ```docker run -p 8080:80```   : redirect trafic from port 8080 to the container's port 80  <external>:<internal>
+- ```docker run -d``` : to let your application turn in backend (and not close once its job's done)
 
 **HOW TO CREATE YOUR OWN IMAGE**
 Make a directory for your project
@@ -38,7 +38,7 @@ ADD <local path> <container's path>  : to copy files/repertory from the host to 
 CMD <command line> : must be the last line, tells the container what command to run at start
 
 Then you need to build your image:
-docker build -t my-app .      => the -t option allows to name the image (the tag to be precise) and the dot tells where the Dockerfile is located
+```docker build -t my-app .```      => the -t option allows to name the image (the tag to be precise) and the dot tells where the Dockerfile is located
 
 **If you want to upload your new image to your Docker repo for other people to pull**
 First you need to create a link and tag your image:
@@ -50,7 +50,7 @@ docker push <your docker hub's name>/<your image's name>:<version>
 **DOCKER-COMPOSE**
 Docker-compose is used to define interactions between containers; how do my wordpress and my MySQL database will interoperate together, for example.
 Docker-compose use YAML syntax in a file named docker-compose.yml:
-- docker-compose up : allows you to run a stack, which is the list of containers you want to run together.
-- docker-compose down : destroy all continers
-- docker-compose stop
-- docker-compose config  : to verify that the docker-compose file we made is correct syntaxically 
+- ```docker-compose up``` : allows you to run a stack, which is the list of containers you want to run together.
+- ```docker-compose down``` : destroy all continers
+- ```docker-compose stop```
+- ```docker-compose config```  : to verify that the docker-compose file we made is correct syntaxically 
