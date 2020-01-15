@@ -27,8 +27,8 @@ sources: [{
       }],
 ```
 
-If you want more videos, just add another ```sources``` block with the right host and playliste name.
-You can then open the player in a web browser on localhost (it will call the playlist on the serve)r.
+If you want more videos, just add another ```sources``` block with the right host and playlist name.
+You can then open the player in a web browser on localhost (it will call the playlist on the server).
 
 You will need to install all files from the dist repertory:
 
