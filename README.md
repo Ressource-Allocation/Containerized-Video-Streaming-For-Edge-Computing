@@ -14,14 +14,14 @@ This brings up a problematic for the ISP; how to allocate resources between each
 
 To study this aspect, we will deploy a VOD (Video On Demand) node that will do ABR (Adaptive Bit Rate) streaming that will emulate a CDP node. As such, a node will represent one CPD.
 
-------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 **REQUIREMENTS**
 
 We used two Ubuntu virtual machines, one serving as a edge node and one serving as a cloud node; we used virtual machines to have to different IP addresses and to be able to catch trafic between the client and the server. So you'll need to install those VMs yourself, with a distribution that fits your needs.
 
 We recommand not to use CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository).
 
-------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 **How to use the docker image**
 
 Once Docker is installed, pull our images and run it.
@@ -130,7 +130,7 @@ Final architecture should be like:
 ```
 The stats directory will hold the streaming statistics that we will analyze.
 
-----------------------------------------------------------------------------------------------------------------------------
+--
 **How to install step by step the streaming client***
 
 We will install here a server nginx to have a videojs player to play our playlist. This server will be on localhost and inside the index.html, it will fetch the videos on the HLS servers (either the edge or cloud node).
@@ -153,7 +153,13 @@ wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-
 
 
 ```
-
+On your VM, you will need Chrome as a your favorite web browser (important).
+Pull the request.sh from our git then execute it:
+```
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/request.sh
+./request.sh
+```
+This script will open several chrome windows which will start streaming from the servers using a Zipf law of distribution between the Edge and Cloud servers (so the probability of streaming from the Edge server is greater than streaming from the Cloud server).
 
 **RESOURCES**
 
@@ -163,6 +169,6 @@ wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-
 - [Jellyfish.mp4](http://www.jell.yfish.us/)
 - [create-vod-hls.sh](https://gist.github.com/mrbar42/ae111731906f958b396f30906004b3fa)
 - [Transcoding using FFMPEG](http://docs.peer5.com/guides/production-ready-hls-vod/)
-- [Draw.io](https://www.draw.io/)
 - [Docker Official Website](https://www.docker.com/)
+- [Chrome](https://www.google.com/intl/fr_fr/chrome/)
 
