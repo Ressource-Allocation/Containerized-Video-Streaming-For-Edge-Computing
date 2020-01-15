@@ -22,7 +22,7 @@ cp index.html /usr/share/nginx/
 Modify this index.html and replace the IPs by those of your VM servers (you might need to install your favortie text editor);
 ```
 sources: [{
-        src: 'http://localhost:8001/playlist.m3u8',
+        src: 'http://localhost:8000/playlist.m3u8',
         type: 'application/x-mpegURL'
       }],
 ```
