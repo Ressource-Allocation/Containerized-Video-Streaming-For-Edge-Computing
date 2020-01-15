@@ -125,22 +125,22 @@ Final architecture should be like:
        |___ cdn.js
        |___ stats/
        |         |__stats.txt
-       |___ catalogue/
-       |             |__ <video files>
+       |___ yourvideos
        |___ ...
 ```
 The stats directory will hold the streaming statistics that we will analyze.
-The catalogue directory is where our transcoded files and playlist are save.
 
---------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 **How to install step by step the streaming client***
+
+We will install here a server nginx to have a videojs player to play our playlist. This server will be on localhost and inside the index.html, it will fetch the videos on the HLS servers (either the edge or cloud node).
 
 Pull an nginx image and run it:
 ```
 sudo docker run -d -p 80:80 --name nginx nginx
 sudo docker exec -it nginx /bin/bash
 ```
-Install on it wget to pull the index.html from our GutHub:
+Install on it wget to pull the index.html and the videojs player from our GutHub:
 ```
 apt-get update
 apt-get install wget
@@ -150,6 +150,7 @@ wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-
 mkdir dist
 cd dist
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/chance.min.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/index.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.min.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-http-streaming.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-playlist.js
+
 
 ```
 
