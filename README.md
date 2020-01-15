@@ -154,13 +154,13 @@ wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-
 
 
 ```
-On your VM, you will need Chrome as a your favorite web browser (important).
+On your client host, you will need Chrome as a your favorite web browser (important). 
 Pull the request.sh from our git then execute it:
 ```
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/request.sh
 ./request.sh
 ```
-This script will open several chrome windows which will start streaming from the servers using a Zipf law of distribution between the Edge and Cloud servers (so the probability of streaming from the Edge server is greater than streaming from the Cloud server).
+This script will open several chrome windows which will start streaming from the servers using a Zipf law of distribution between the Edge and Cloud servers (so the probability of streaming from the Edge server is greater than streaming from the Cloud server). Since we used an Ubuntu distribution on the machine host, this script is a bash
 
 --- 
 
