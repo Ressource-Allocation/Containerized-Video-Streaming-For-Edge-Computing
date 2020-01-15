@@ -28,11 +28,11 @@
             if(xmlrequest.status === 200){
               let stats = xmlrequest.responseText;
 	      stats = stats.split(";");
+              var counterTotal =0
 	      var counter360 =0
 	      var counter480 =0
 	      var counter720 =0
 	      var counter1080 =0
-	      var counterTotal =0
 	      stats.forEach(element => {
 	      		element = element.split(",");
 	      		var re1 = new RegExp("^360.*ts$");
@@ -41,7 +41,7 @@
 	      		var re4 = new RegExp("^1080.*ts$");
 	      		if (re1.test(element[0].trim(" "))) {
 	      			counter360++;
-	      		}
+			}
 	      		if (re2.test(element[0].trim(" "))) {
 	      			counter480++;
 	      		}
@@ -52,7 +52,8 @@
 	      			counter1080++;
 	      		}
 		}); 
-	      counterTotal = counter360 + counter480 + counter720 + counter1080;
+		counterTotal = counter360 + counter480 + counter720 + counter1080;
+
 	      if(stats.length === 0){
 		statsHTML =  "The Stat file is empty.<br> You need to play videos with the player to be able to generate stats.</br>"
 		catalogueDOM.innerHTML = statsHTML;
@@ -79,7 +80,7 @@
 			position : "top"},
 		title :{
 			display: true,
-			text: "Chart.js CDN statistics: "+ totalCounter + " total segments"},
+			text: "Chart.js CDN statistics: "+ counterTotal +" total segments" }, 
 	 	scales: {
 		    yAxes: [{
 		        ticks: {
