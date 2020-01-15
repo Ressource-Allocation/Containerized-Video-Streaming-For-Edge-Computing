@@ -9,7 +9,7 @@
 <body>
   <h3> Node.js Web Server For Serving HLS files</h3>
   <h4> FIPA PROJECT : Containerized Video Streaming For Edge Computing</h4><br>
- 
+
   <h4> Stats generated on the CDN : </h4>
   <ol id="stats"></ol>
 <div style="height: 400px">
@@ -28,12 +28,12 @@
             if(xmlrequest.status === 200){
               let stats = xmlrequest.responseText;
 	      stats = stats.split(";");
-              var counterTotal =0
 	      var counter360 =0
 	      var counter480 =0
 	      var counter720 =0
 	      var counter1080 =0
-	      stats.forEach(element => {
+              var counterTotal =0
+		    stats.forEach(element => {
 	      		element = element.split(",");
 	      		var re1 = new RegExp("^360.*ts$");
 	      		var re2 = new RegExp("^480.*ts$");
@@ -41,7 +41,7 @@
 	      		var re4 = new RegExp("^1080.*ts$");
 	      		if (re1.test(element[0].trim(" "))) {
 	      			counter360++;
-			}
+	      		}
 	      		if (re2.test(element[0].trim(" "))) {
 	      			counter480++;
 	      		}
@@ -52,8 +52,7 @@
 	      			counter1080++;
 	      		}
 		}); 
-		counterTotal = counter360 + counter480 + counter720 + counter1080;
-
+              counterTotal = counter360 + counter480 + counter720 + counter1080
 	      if(stats.length === 0){
 		statsHTML =  "The Stat file is empty.<br> You need to play videos with the player to be able to generate stats.</br>"
 		catalogueDOM.innerHTML = statsHTML;
@@ -80,7 +79,7 @@
 			position : "top"},
 		title :{
 			display: true,
-			text: "Chart.js CDN statistics: "+ counterTotal +" total segments" }, 
+			text: "Chart.js CDN statistics: "+ counterTotal + " total segments"},
 	 	scales: {
 		    yAxes: [{
 		        ticks: {
@@ -110,7 +109,8 @@
         }
         xmlrequest.send();
       } 
-	
+
   </script>
 </body>
 </html>
+
