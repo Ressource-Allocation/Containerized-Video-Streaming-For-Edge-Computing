@@ -31,7 +31,8 @@ If you want more videos, just add another ```sources``` block with the right hos
 You can then open the player in a web browser on localhost (it will call the playlist on the serve)r.
 
 You will need to install all files from the dist repertory:
-``̀`
+
+```
 mkdir /usr/share/nginx/html/dist/
 cd /usr/share/nginx/html/dist/
 wget wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/chance.min.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/index.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.min.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-http-streaming.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-playlist.js
