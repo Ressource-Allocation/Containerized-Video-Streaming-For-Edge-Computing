@@ -32,6 +32,7 @@
 	      var counter480 =0
 	      var counter720 =0
 	      var counter1080 =0
+	      var counterTotal =0
 	      stats.forEach(element => {
 	      		element = element.split(",");
 	      		var re1 = new RegExp("^360.*ts$");
@@ -51,6 +52,7 @@
 	      			counter1080++;
 	      		}
 		}); 
+	      counterTotal = counter360 + counter480 + counter720 + counter1080;
 	      if(stats.length === 0){
 		statsHTML =  "The Stat file is empty.<br> You need to play videos with the player to be able to generate stats.</br>"
 		catalogueDOM.innerHTML = statsHTML;
@@ -77,7 +79,7 @@
 			position : "top"},
 		title :{
 			display: true,
-			text: "Chart.js CDN statistics"},
+			text: "Chart.js CDN statistics: "+ totalCounter + " total segments"},
 	 	scales: {
 		    yAxes: [{
 		        ticks: {
@@ -85,7 +87,7 @@
 		        }, 
 			 scaleLabel:{
 		                    display: true,
-		                    labelString: 'Number of videos',
+		                    labelString: 'Number of segments',
 		                    fontColor: "#546372"
 		                }
 		    }],
