@@ -151,7 +151,7 @@ function PageNotFound(response, pagename){
 function OpenAndWrite(path, buffer){
 	fs.open(path, 'a', function(err, fd) {
 	    if (err) {
-		throw 'could not open file: ' + err;
+		console.log(err);
 	    }
 	 fs.writeFile(fd, new Buffer(buffer), (err) => {
     		if (err) throw err;
