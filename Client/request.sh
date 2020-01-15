@@ -1,10 +1,9 @@
 #!/bin/bash
-RequestNumber=10
-for ((i=1; i <= $RequestNumber; i++))
+RequestNumber=5
+for ((i=1;i <= $RequestNumber; i++))
 do
-	(google-chrome --disable-gpu --new-window 127.0.0.1)&
+	(google-chrome --user-data-dir="$HOME/$i" --disable-web-security --disable-gpu --new-window 127.0.0.1) &
 done
-
-sleep 30
-
+sleep 30 
 killall -9 /opt/google/chrome/chrome
+
