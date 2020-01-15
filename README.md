@@ -29,7 +29,7 @@ To pull the image:
 ```
 docker pull 
 ```
--------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 **Installation of the servers step by step**
 
 Here are the steps:
@@ -131,6 +131,7 @@ Final architecture should be like:
 The stats directory will hold the streaming statistics that we will analyze.
 
 --
+
 **How to install step by step the streaming client***
 
 We will install here a server nginx to have a videojs player to play our playlist. This server will be on localhost and inside the index.html, it will fetch the videos on the HLS servers (either the edge or cloud node).
