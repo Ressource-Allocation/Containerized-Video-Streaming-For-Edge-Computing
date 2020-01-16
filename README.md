@@ -22,13 +22,52 @@ We used two Ubuntu virtual machines, one serving as a edge node and one serving 
 We recommand not to use CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository).
 
 ---
-**How to use the docker image**
+**How to use the project**
 
-Once Docker is installed, pull our images and run it.
-To pull the image:
+Open the port 8000 on both VM hosting the servers:
 ```
-docker pull 
+ufw allow 8000/tcp
 ```
+You'll need to install wondershaper on your VM hosting the Cloud server to limit the bandwidth;
+```
+apt-get install wondershaper
+wondershaper <interface name> <upload speed> <download speed>
+```
+
+Once Docker is installed in your VMs hosting the servers and client, pull our images and run it.
+To pull the server image (hosting the videos and statistics):
+```
+docker run -d -p 8000:8000
+```
+
+To pull the client image (nginx server hosting the videojs player), connect to it and modify the ip addresses in the index.html file:
+```
+docker run -d -p 80:80
+docker exec -it server bash
+vi /usr/share/nginx/html/index.html
+```
+Modify the following lines with the correct addresses:
+```
+sources: [{
+        src: 'http://localhost:8000/playlist.m3u8',
+        type: 'application/x-mpegURL'
+      }],
+```
+
+
+On the client, you can now launch the trafic:
+```
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/request.sh
+./request.sh
+```
+
+You can access the trafic graphs on the server on a browser:
+```
+http://<your server ip address:8000/stats
+```
+
+
+
 ---
 **Installation of the servers step by step**
 
@@ -74,7 +113,7 @@ sudo docker run -dit -p 8000:8000 --name server-hls ubuntu
 sudo docker cp jellyfish.mp4 server-hls:/
 sudo docker exec -dit server-hls
 ```
-Our video, ```jellyfish.mp4``` can be found [here](http://www.jell.yfish.us/).
+Our video, ```jellyfish.mp4``` can be found [here](http://www.jell.yfish.us/) under different resolutions.
 
 Now we need ffmpeg, that we will use to create our playlist (create_vod_playlist.sh):
 ```
@@ -121,7 +160,6 @@ Final architecture should be like:
 ```
    ----/
        |___ create-vod-hls.sh
-       |___ populate-catalogue.sh
        |___ cdn.js
        |___ stats/
        |         |__stats.txt
@@ -130,6 +168,12 @@ Final architecture should be like:
 ```
 The stats directory will hold the streaming statistics that we will analyze.
 
+You'll need to install wondershaper on your VM hosting the Cloud to limit the bandwidth;
+```
+apt-get install wondershaper
+wondershaper <interface name> <upload speed> <download speed>
+```
+We limit the outgoing speed of the VM to emulate a limited bandwitdth, since the bandwidth is supposed to be limited between the Edge and Cloud nodes. 
 ---
 
 **How to install step by step the streaming client**
@@ -152,7 +196,21 @@ mkdir dist
 cd dist
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/chance.min.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/index.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.min.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-http-streaming.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-playlist.js
 
-
+```
+The final topology on the client should be:
+```
+---/
+   |___ /usr/share/nginx/html/
+   |                         |___ index.html
+   |                         |___ dist/
+   |                                  |___ index.css
+   |                                  |___ random.js
+   |                                  |___ video-js.css
+   |                                  |___ video-js.min.css
+   |                                  |___ video.js
+   |                                  |___ videojs-http-streaming.js
+   |                                  |___ videojs-playlist.js
+   |___ ...
 ```
 On your client host, you will need Chrome as a your favorite web browser (important). 
 Pull the request.sh from our git then execute it:
@@ -160,7 +218,7 @@ Pull the request.sh from our git then execute it:
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/request.sh
 ./request.sh
 ```
-This script will open several chrome windows which will start streaming from the servers using a Zipf law of distribution between the Edge and Cloud servers (so the probability of streaming from the Edge server is greater than streaming from the Cloud server). Since we used an Ubuntu distribution on the machine host, this script is a bash
+This script will open several chrome windows which will start streaming from the servers using a Zipf law of distribution between the Edge and Cloud servers (so the probability of streaming from the Edge server is greater than streaming from the Cloud server). Since we used an Ubuntu distribution on the machine host, this script is in bash.
 
 --- 
 
