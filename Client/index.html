@@ -64,13 +64,13 @@
    <script>
     var videoListCDN = [{
       sources: [{
-        src: 'http://localhost:8001/playlist.m3u8',
+        src: 'http://localhost:8000/playlist.m3u8',
         type: 'application/x-mpegURL'
       }],
       poster: 'http://www.videojs.com/img/poster.jpg'
     }, {
       sources: [{
-        src: 'http://localhost:8001/playlist.m3u8',
+        src: 'http://localhost:8000/playlist.m3u8',
         type: 'application/x-mpegURL'
       }],
       poster: 'http://www.videojs.com/img/poster.jpg'
@@ -78,13 +78,13 @@
 
     var videoListCloud = [{
       sources: [{
-        src: 'http://localhost:8000/playlist.m3u8',
+        src: 'http://localhost:8001/playlist.m3u8',
         type: 'application/x-mpegURL'
       }],
       poster: 'http://www.videojs.com/img/poster.jpg'
     }, {
       sources: [{
-        src: 'http://localhost:8000/playlist.m3u8',
+        src: 'http://localhost:8001/playlist.m3u8',
         type: 'application/x-mpegURL'
       }],
       poster: 'http://www.videojs.com/img/poster.jpg'
@@ -182,8 +182,8 @@
     		return high;
   	}
 	var prob_zipf = Prob(1, 100);
-	console.log(prob_zipf());
-	if (prob_zipf < 50){
+	var_prob = prob_zipf();
+	if (var_prob < 50){
 		    player.playlist(videoListCDN);
 		    player.playlist.repeat(true);
 		    player.playlist.shuffle({rest: true});
