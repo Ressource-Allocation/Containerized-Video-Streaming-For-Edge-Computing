@@ -10,13 +10,10 @@ This code is used to populate the catalog directory which will contain all video
 
 This code provides resolutions up to 1920x1080. If you want higher resolution, you will have to tweak this script. We recommand you to visit [here](https://docs.peer5.com/guides/production-ready-hls-vod/) if that's the case.
 
-**running:**
+
+** How to use **
 ```
 bash create-vod-hls.sh example.mp4
-```
-
-**Produce:**
-```
       |- playlist.m3u8
       |- 360p.m3u8
       |- 360p_001.ts
