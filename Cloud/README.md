@@ -6,7 +6,7 @@ This node server will serve up the m3u8 files to an HLS compatible client (Chrom
 Run the following command inside your server container to run make the HLS server running:
 
 ```
-node cdn.js
+node cloud.js
 ```
 If you acces via your browser:
  * **http://<server's ip>:PORT**  to show the home page with the list of available videos on the CDN catalogue. 
