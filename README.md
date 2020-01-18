@@ -12,7 +12,7 @@ In real world, CDP already use physical servers in the access network, but as CD
 
 This brings up a problematic for the ISP; how to allocate resources between each CDP nodes ?
 
-To study this aspect, we will deploy a VOD (Video On Demand) node that will do ABR (Adaptive Bit Rate) streaming that will emulate a CDP node. As such, a node will represent one CPD.
+To study this aspect, we will deploy a **VOD (Video On Demand)** server that will do **ABR (Adaptive Bit Rate)** streaming through **HLS (HTTP Live Streaming)** as a CDN.
 
 ---
 **REQUIREMENTS**
@@ -55,17 +55,22 @@ sources: [{
 ```
 
 
-On the client, you can now launch the trafic:
+On the client, if you launch the **request.sh** script, it will launch multiple browser windows that will start streaming:
 ```
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/request.sh
 ./request.sh
 ```
 
-You can access the trafic graphs on the server on a browser:
+You can access the quality distribution graphs of the segments sent by the server on a browser:
 ```
 http://<your server ip address:8000/stats
 ```
-
+If you want to see the graph of the segments received by the Client, merge the stats of the two servers. To do so, connect to one server:
+```
+wget http://<ip of the other server>:8000/raw_stats
+cat raw_stats >> /stats/generated_stats.txt
+```
+Then re-open the graph of this server (it will replace the file though).
 
 
 ---
@@ -121,7 +126,6 @@ apt-get install ffmpeg
 ```
 Install these tools:
 ```
-apt-get install ffmpeg
 apt-get install wget
 apt-get install bc
 apt-get install curl
@@ -146,7 +150,7 @@ What does these scripts do ?
 - cdn.js : our node.js app, i.e. it creates the HLS server, which use the index.html for presentation.
 
 
-To start the node.js server, you should use:
+To start the node.js server inside the container, you should use:
 ```
 node cdn.js
 ```
