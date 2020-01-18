@@ -1,9 +1,9 @@
 ## NODE JS Server/middleware for serving HLS compatible media streams.
 
-Generate your .m3u8 playlist using tools in the **/Converting** directory and place them in / directory on the node js server.
-This node server will serve up the m3u8 files to an HLS compatible client (Chrome).  
+Generate your .m3u8 playlist using tools in the **/Converting** directory and place them in **/** directory on the node js server.
+This node server will serve up the m3u8 files to an HLS compatible client (Chrome).
 
-## Using
+Run the following command after uploading to your server container the cdn.js script:
 
 ```
 node cdn.js
