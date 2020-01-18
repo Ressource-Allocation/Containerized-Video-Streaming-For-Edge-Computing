@@ -11,4 +11,5 @@ You simply have to make sur the container is running, and then access the player
 
 If you want a player with buttons to automate a number of requests, use the index.html file from the **Client/player_with_buttons** directory.
 
+On your client, run the **request.sh** script to open a number of browser windows to emulate silmutaneous connections.
 
