@@ -16,9 +16,7 @@ bash create-vod-hls.sh example.mp4
 ```
 
 **Produce:**
-```text
-bash create-vod-hls.sh example.mp4
-    example/
+```
       |- playlist.m3u8
       |- 360p.m3u8
       |- 360p_001.ts
