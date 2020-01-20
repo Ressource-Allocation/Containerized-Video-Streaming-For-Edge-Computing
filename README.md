@@ -19,7 +19,7 @@ To study this aspect, we will deploy a **VOD (Video On Demand)** server that wil
 
 We used two Ubuntu virtual machines, one serving as a edge node and one serving as a cloud node; we used virtual machines to have to different IP addresses and to be able to catch trafic between the client and the server. So you'll need to install those VMs yourself, with a distribution that fits your needs.
 
-We recommand not to use CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository).
+We recommand not using CentOS as it can be troublesome to install ffmpeg (ffmpeg doesn't have a CentOS repository).
 
 ---
 **How to use the project**
@@ -37,7 +37,7 @@ wondershaper <interface name> <upload speed> <download speed>
 Once Docker is installed on your VMs hosting the servers and client, pull our images and run it.
 To pull the server image (hosting the videos and statistics):
 ```
-docker run -d -p 8000:8000 telecomsudparisthddockerhub/server-hls
+docker run -d -p 8000:8000 tspthddockerhub/server-hls
 ```
 
 Modify the following lines with the correct ip addresses:
