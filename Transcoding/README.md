@@ -12,6 +12,7 @@ This code provides resolutions up to 1920x1080. If you want higher resolution, y
 ---
 
 ***How to use***
+
 Running the command:
 ```
 bash create-vod-hls.sh example.mp4
