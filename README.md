@@ -34,28 +34,30 @@ apt-get install wondershaper
 wondershaper <interface name> <upload speed> <download speed>
 ```
 
-Once Docker is installed in your VMs hosting the servers and client, pull our images and run it.
+Once Docker is installed on your VMs hosting the servers and client, pull our images and run it.
 To pull the server image (hosting the videos and statistics):
 ```
-docker run -d -p 8000:8000
+docker run -d -p 8000:8000 telecomsudparisthddockerhub/server-hls
 ```
 
-To pull the client image (nginx server hosting the videojs player), connect to it and modify the ip addresses in the index.html file:
+Modify the following lines with the correct ip addresses:
 ```
-docker run -d -p 80:80
-docker exec -it server bash
-vi /usr/share/nginx/html/index.html
-```
-Modify the following lines with the correct addresses:
-```
-sources: [{
-        src: 'http://localhost:8000/playlist.m3u8',
+     sources: [{
+        src: 'http://<Cloud ip address>:8000/playlist.m3u8',
         type: 'application/x-mpegURL'
       }],
+      poster: 'http://www.videojs.com/img/poster.jpg'
+    }, {
+      sources: [{
+        src: 'http://<Cloud ip address>:8000/playlist.m3u8',
+        type: 'application/x-mpegURL'
+      }],
+      poster: 'http://www.videojs.com/img/poster.jpg'
+    }]
 ```
 
 
-On the client, if you launch the **request.sh** script, it will launch multiple browser windows that will start streaming:
+On the client, if you launch the **request.sh** script, it will launch multiple Chrome browser windows that will start streaming:
 ```
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/request.sh
 ./request.sh
@@ -70,7 +72,7 @@ If you want to see the graph of the segments received by the Client, merge the s
 wget http://<ip of the other server>:8000/raw_stats
 cat raw_stats >> /stats/generated_stats.txt
 ```
-Then re-open the graph of this server (it will replace the file though).
+Then refresh the graph of this server (it will replace the file though).
 
 
 ---
@@ -82,12 +84,11 @@ Here are the steps:
 - Pulling an Ubuntu image and use it to run a container,
 - Installing all necessary tools and packages,
 - Pulling our scripts on the container,
-- Populating the containers with a catalogue using the populate-catalogue.sh (which use the create-vod-hls.sh),
 - Launching the node.js server (using the cdn.js).
 
 Now you only need to automate the requests and analyze them.
 
-Because we used Ubuntu, commands may changes (we used yum as a package manager). As both servers have the same configuration, you need to do it on both machines. We recommand using a tool with a multi-execution split screen mode, like [MobaXterm](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiykv6Sh4HnAhVFxIUKHV3aBtAQFjAAegQICBAC&url=https%3A%2F%2Fmobaxterm.mobatek.net%2F&usg=AOvVaw2p74aXHoSZjuU9aYznA2Af) or equivalent (to allow you to execute a command on two screens directly).
+Because we used Ubuntu, commands may changes (we used apt as a package manager). As both servers have the same configuration, you need to do it on both machines. We recommand using a tool with a multi-execution split screen mode, like [MobaXterm](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiykv6Sh4HnAhVFxIUKHV3aBtAQFjAAegQICBAC&url=https%3A%2F%2Fmobaxterm.mobatek.net%2F&usg=AOvVaw2p74aXHoSZjuU9aYznA2Af) or equivalent (to allow you to execute a command on two screens directly).
 
 On each VM, you will need to install Docker (you can refer to [this](https://docs.docker.com/install/linux/docker-ce/ubuntu/) docker installation tutorial):
 ```
@@ -106,7 +107,7 @@ sudo apt-get install \
     
  sudo apt-get install docker-ce docker-ce-cli containerd.io
  ```
-Note that this installation doesn't need a Docker Hub account (Docker for Desktop requires one) but if you plan on using Docker Hub Registries and make your own docker images, you may want to create one.
+Note that this installation doesn't need a Docker Hub account (Docker for Desktop requires one) but if you plan on using Docker Hub registries and making your own docker images, you may want to create one.
 
 We will pull an ubuntu docker image:
 ```
@@ -115,10 +116,9 @@ sudo docker pull ubuntu
 Then we will run this image in a container on which we will install packages and a video (even though best practices would be to use a Dockerfile \[we did this after\]:
 ```
 sudo docker run -dit -p 8000:8000 --name server-hls ubuntu
-sudo docker cp jellyfish.mp4 server-hls:/
 sudo docker exec -dit server-hls
 ```
-Our video, ```jellyfish.mp4``` can be found [here](http://www.jell.yfish.us/) under different resolutions.
+
 
 Now we need ffmpeg, that we will use to create our playlist (create_vod_playlist.sh):
 ```
@@ -129,7 +129,9 @@ Install these tools:
 apt-get install wget
 apt-get install bc
 apt-get install curl
+curl --output jellyfish.mp4 http://www.jell.yfish.us/media/jellyfish-10-mbps-hd-h264.mkv
 ```
+Our video, ```jellyfish.mp4``` can be found [here](http://www.jell.yfish.us/) under different resolutions.
 
 You then need node.js:
 ```
@@ -138,17 +140,41 @@ apt-get install -y nodejs
 npm install fluent-ffmpeg
 ```
 
-Download our scripts to your containers:
+Download the Videos.js and its dependencies, and also our scripts to your containers:
 ```
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Converting/bash%20converter/create-vod-hls.sh
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/cdn.js
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/index.html
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/stats.html
+mkdir /dist
+cd /dist
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/index.css 
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/random.js 
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/video-js.css 
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/video-js.min.css 
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/video.js 
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/videojs-http-streaming.js 
+wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/videojs-playlist.js 
 ```
-What does these scripts do ?
+What do these scripts do ?
 - create-vod-hls.sh : creates a m3u8 playlist of multiple resolutions from a source video, 
-- cdn.js : our node.js app, i.e. it creates the HLS server, which use the index.html for presentation.
+- cdn.js : our node.js app, i.e. it creates the HLS server, which uses the index.html for presentation and as a Video.js player.
 
+Modify the following lines with the correct addresses in the index.html:
+```
+     sources: [{
+        src: 'http://<Cloud ip address>:8000/playlist.m3u8',
+        type: 'application/x-mpegURL'
+      }],
+      poster: 'http://www.videojs.com/img/poster.jpg'
+    }, {
+      sources: [{
+        src: 'http://<Cloud ip address>:8000/playlist.m3u8',
+        type: 'application/x-mpegURL'
+      }],
+      poster: 'http://www.videojs.com/img/poster.jpg'
+    }]
+```
 
 To start the node.js server inside the container, you should use:
 ```
@@ -168,6 +194,14 @@ Final architecture should be like:
        |___ stats/
        |         |__stats.txt
        |___ yourvideos
+       |___ dist/
+       |        |___ index.css
+       |        |___ random.js
+       |        |___ video-js.css
+       |        |___ video-js.min.css
+       |        |___ video.js
+       |        |___ videojs-http-streaming.js
+       |        |___ videojs-playlist.js
        |___ ...
 ```
 The stats directory will hold the streaming statistics that we will analyze.
@@ -177,63 +211,31 @@ You'll need to install wondershaper on your VM hosting the Cloud to limit the ba
 apt-get install wondershaper
 wondershaper <interface name> <upload speed> <download speed>
 ```
-We limit the outgoing speed of the VM to emulate a limited bandwitdth, since the bandwidth is supposed to be limited between the Edge and Cloud nodes. 
+We limit the outgoing speed of the VM hosting the Cloud server to emulate a limited bandwitdth between the Edge and Cloud nodes. 
+
 ---
+***How to automate requests***
 
-**How to install step by step the streaming client**
-
-We will install here a server nginx to have a videojs player to play our playlist. This server will be on localhost and inside the index.html, it will fetch the videos on the HLS servers (either the edge or cloud node).
-
-Pull an nginx image and run it:
-```
-sudo docker run -d -p 80:80 --name nginx nginx
-sudo docker exec -it nginx /bin/bash
-```
-Install on it wget to pull the index.html and the videojs player from our GutHub:
-```
-apt-get update
-apt-get install wget
-cd /usr/share/nginx/html/
-rm index.html
-wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/player_with_button/index.html
-mkdir dist
-cd dist
-wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/chance.min.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/index.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video-js.min.css && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/video.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-http-streaming.js && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/dist/videojs-playlist.js
-
-```
-The final topology on the client should be:
-```
----/
-   |___ /usr/share/nginx/html/
-   |                         |___ index.html
-   |                         |___ dist/
-   |                                  |___ index.css
-   |                                  |___ random.js
-   |                                  |___ video-js.css
-   |                                  |___ video-js.min.css
-   |                                  |___ video.js
-   |                                  |___ videojs-http-streaming.js
-   |                                  |___ videojs-playlist.js
-   |___ ...
-```
-On your client host, you will need Chrome as a your favorite web browser (important). 
+On your client host from which you want to generate requests, you will need Chrome web browser. 
 Pull the request.sh from our git then execute it:
 ```
 wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Client/request.sh
 ./request.sh
 ```
-This script will open several chrome windows which will start streaming from the servers using a Zipf law of distribution between the Edge and Cloud servers (so the probability of streaming from the Edge server is greater than streaming from the Cloud server). Since we used an Ubuntu distribution on the machine host, this script is in bash.
+This script will open several chrome windows, which will start streaming from the servers using a Zipf law of distribution between the Edge and Cloud servers (so the probability of streaming from the Edge server is greater than streaming from the Cloud server). Since we used an Ubuntu distribution on the machine host, this script is in bash.
+
+At first run, you will be prompted to make Chrome your favorite web browser: click 'yes' (it will only Chrome the favorite browser of the Dev Session and will not erase the actual user favorite web browser).
 
 --- 
 
 **RESOURCES**
 
 - [Node.js](https://nodejs.org/en/about/)
-- [Nginx](https://www.nginx.com/)
 - [VOD tutorial](https://selimatmaca.com/index.php/live-streaming?fbclid=IwAR0KnwW_2ctxplcA-JTfVU6rBrngZdmpCHoiYpAQses_os5REMfp_0Oy_0E)
 - [Jellyfish.mp4](http://www.jell.yfish.us/)
 - [create-vod-hls.sh](https://gist.github.com/mrbar42/ae111731906f958b396f30906004b3fa)
 - [Transcoding using FFMPEG](http://docs.peer5.com/guides/production-ready-hls-vod/)
 - [Docker Official Website](https://www.docker.com/)
 - [Chrome](https://www.google.com/intl/fr_fr/chrome/)
+- [Video.js](https://videojs.com/getting-started)
 
