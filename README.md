@@ -229,7 +229,8 @@ At first run, you will be prompted to make Chrome your favorite web browser: cli
 --- 
 
 **RESOURCES**
-
+All resources used in our project are their author propriety:
+- [Prob.js](https://github.com/bramp/prob.js/blob/master/prob.js)
 - [Node.js](https://nodejs.org/en/about/)
 - [VOD tutorial](https://selimatmaca.com/index.php/live-streaming?fbclid=IwAR0KnwW_2ctxplcA-JTfVU6rBrngZdmpCHoiYpAQses_os5REMfp_0Oy_0E)
 - [Jellyfish.mp4](http://www.jell.yfish.us/)
