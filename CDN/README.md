@@ -9,7 +9,7 @@ Run the following command inside your server container to run make the HLS serve
 node cdn.js
 ```
 If you acces via your browser:
- * **http://<server's ip>:PORT**Home page with player.
+ * **http://<server's ip>:PORT**Home page with player. It will start streaming automatically. If you want a player with buttons to automate a number of requests, use the index.html file from the Client/player_with_buttons directory.
  * **http://<server's ip>:PORT/playlist_name.m3u8** to get a video/playlist by name.
  * **http://<server's ip>:PORT/list** to get the list of the m3u8 playlists available in catalogue in Json format.
  * **http://<server's ip>:PORT/raw_data** to get the raw data used to generate the stats chart.
