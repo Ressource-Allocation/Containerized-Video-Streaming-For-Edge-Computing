@@ -1,6 +1,7 @@
 **Easy Cheat Sheet for Docker**
 
 **HOW DOES IT WORK (SIMPLIFIED)**
+
 Or how do we unsterdand it works:
 - Docker is a light virtualization != heavy virtualization in virtual machines
 - With Docker you only deploy apps, without OS (just a light environment like libraries)
