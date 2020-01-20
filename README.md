@@ -1,6 +1,6 @@
 # Containerized-Video-Streaming-For-Edge-Computing
-
-Brace yourself, this may take a while to read.
+This project has been made under Creative Commons licence CC-BY.
+For more information about this licence, please read [this](https://creativecommons.org/licenses/by/4.0/).
 
 **INTRODUCTION**
 
