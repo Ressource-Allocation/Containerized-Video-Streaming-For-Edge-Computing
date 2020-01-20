@@ -8,9 +8,9 @@ In this project, we will deploy a containerized CDN (Content Delivery Network) E
 
 As the bandwidth needs double on average every three years, deploying a content cache directly within the access network, as close as possible to the clients becomes a relevant solution to save bandwidth within the core network and to provide a better user experience (faster site loading time, reduced latency). This will benefits both the ISP (Internet Service Provider) and the CDP.
 
-In real world, CDP already use physical servers in the access network distributed around the world, but as new technologies emerge, it becomes relevant to implement these servers in the Access Network (in the Central Office of Network Operators); this means to possibly deploy millions of CDN caches. One way to do it is through containerization.
+In real world, CDP already use physical servers distributed around the world, but as new technologies emerge, it becomes relevant to implement these servers in the Access Network (in the Central Office of Network Operators); this means to possibly deploy millions of CDN caches. One way to do it is through containerization.
 
-This brings up a problematic for the ISP; how to allocate resources between each containerized CDP nodes ?
+This brings up a problematic for the Network Operator; how to allocate resources between each containerized CDP node ?
 
 To study this aspect, we will deploy a **VOD (Video On Demand)** server that will do **ABR (Adaptive Bit Rate)** streaming through **HLS (HTTP Live Streaming)** as a CDN.
 
