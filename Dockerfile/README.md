@@ -1,3 +1,4 @@
-This is our Dockerfile.
-You can tweak it as you'd like.
-Don't forget to build your image after.
+This is our HLS server Dockerfile.
+Please feel free to use it.
+
+If you need more information about Dockerfile, please read our CheatSheet.
