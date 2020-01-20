@@ -1,5 +1,5 @@
 //Web server node js => Serve HLS files
-//Author : A.MINKO
+//Author : A.M
 //browse to to http://<hostname>:PORT/ eg. http://localhost:8000
 
 var http = require('http');
@@ -17,7 +17,7 @@ function sendIndexHtml(response){
 	pathname = '/index.html';		
 	fs.readFile(pathname.substr(1), (err, data) => {
 	if (err) {
-		console.error(err);
+		consoltext/csse.error(err);
 		response.writeHead(404, { 'Content-Type': 'text/plain' });
 		response.write('404 - file not found');
       	} else {
@@ -43,6 +43,7 @@ function sendStatHtml(response){
 	response.end();
   	})
 }
+
 
 //Send stat file
 function sendStatContents(response){
@@ -219,6 +220,16 @@ http.createServer(function (request, response) {
 						}
 					});
 					break;
+			case '.js':
+				var stream = fs.createReadStream(filename,
+				{ bufferSize: 64 * 1024 });
+				stream.pipe(response);
+				break;
+			case '.css':
+				var stream = fs.createReadStream(filename,
+				{ bufferSize: 64 * 1024 });
+				stream.pipe(response);
+				break;
 			case '.ts':
 				response.writeHead(200, { 'Content-Type':
 				'video/MP2T' });
