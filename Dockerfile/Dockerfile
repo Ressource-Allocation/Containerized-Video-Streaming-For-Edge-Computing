@@ -13,7 +13,9 @@ RUN apt-get update -yq \
 && https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Transcoding/create-vod-hls.sh \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/server.js \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/index.html \
-&& bash create-vod-hls.sh jellyfish.mp4 /
+&& wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/stats.html \
+&& bash create-vod-hls.sh jellyfish.mp4 / \
+&& mkdir /stats \
 && mkdir /dist \
 && cd /dist \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/index.css \
