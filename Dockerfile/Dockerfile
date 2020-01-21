@@ -1,12 +1,14 @@
-FROM ubuntu
+FROM alpine
 EXPOSE 8000
-RUN apt-get update -yq \
-&& apt-get install ffmpeg -yq \
-&& apt-get install wget -yq \
-&& apt-get install bc -yq \
-&& apt-get install curl -yq \
-&& curl -sL https://deb.nodesource.com/setup_13.x | bash - \
-&& apt-get install -y nodejs \
+RUN apk update \
+&& apk add ffmpeg \
+&& apk add wget \
+&& apk add bc \
+&& apk add curl \
+&& apk add vim \
+&& apk add nodejs \
+&& apk add npm \
+&& apk add bash \
 && npm install fluent-ffmpeg \
 && curl --output jellyfish.mp4 http://www.jell.yfish.us/media/jellyfish-10-mbps-hd-h264.mkv \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Transcoding/create-vod-hls.sh \
