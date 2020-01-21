@@ -10,7 +10,7 @@ RUN apt-get update -yq \
 && apt-get install -y nodejs \
 && npm install fluent-ffmpeg \
 && curl --output jellyfish.mp4 http://www.jell.yfish.us/media/jellyfish-10-mbps-hd-h264.mkv \
-&& https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Transcoding/create-vod-hls.sh \
+&& wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Transcoding/create-vod-hls.sh \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/server.js \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/index.html \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/stats.html \
