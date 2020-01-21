@@ -12,7 +12,7 @@ RUN apt-get update -yq \
 && apt-get install -y nodejs \
 && npm install fluent-ffmpeg \
 https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/Transcoding/create-vod-hls.sh \
-&& wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/cdn.js \
+&& wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/server.js \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/index.html \
 && mkdir /dist \
 && cd /dist \
@@ -23,4 +23,4 @@ https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Strea
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/video.js \
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/videojs-http-streaming.js \ 
 && wget https://raw.githubusercontent.com/Ressource-Allocation/Containerized-Video-Streaming-For-Edge-Computing/master/CDN/dist/videojs-playlist.js 
-CMD node /cdn.js
+CMD node server.js
