@@ -1,6 +1,5 @@
 FROM ubuntu
 EXPOSE 8000
-EXPOSE 80
 RUN apt-get update -yq \
 && apt-get install ffmpeg -yq \
 && apt-get install wget -yq \
