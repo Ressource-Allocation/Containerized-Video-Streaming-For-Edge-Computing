@@ -3,8 +3,6 @@ EXPOSE 8000
 EXPOSE 80
 RUN apt-get update -yq \
 && apt-get install ffmpeg -yq \
-&& apt-get install nodejs -yq \
-&& apt-get install npm -yq \
 && apt-get install wget -yq \
 && apt-get install bc -yq \
 && apt-get install curl -yq \
