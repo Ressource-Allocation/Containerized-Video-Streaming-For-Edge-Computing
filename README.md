@@ -37,7 +37,7 @@ wondershaper <interface name> <upload speed> <download speed>
 Once Docker is installed on your VMs hosting the servers and client, pull our images and run it.
 To pull the server image (hosting the videos and statistics):
 ```
-docker run -d -p 8000:8000 tspthddockerhub/server-hls
+docker run -d -p 8000:8000 organizededge/server-vod-hls
 ```
 
 Modify the following lines with the correct ip addresses:
