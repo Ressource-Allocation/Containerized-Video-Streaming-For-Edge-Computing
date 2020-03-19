@@ -209,7 +209,11 @@ Final architecture should be like:
 ```
 The stats directory will hold the streaming statistics that we will analyze.
 
+----
 ***Watch videos on a client***
+
+Use Google Chrome (other browsers may not work)
+
 CHENGLONG
 
 **SET UP TESTBED CONFIGURATION**
