@@ -188,7 +188,7 @@ Inside this bash, open (with nano, for example) the file `index.html` and modify
 
 To start the node.js server inside the container, you should use:
 ```
-node cdn.js
+node server.js
 ```
 
 Make sure your VM ports are open to allow incoming trafic:
