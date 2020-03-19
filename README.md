@@ -164,7 +164,13 @@ What do these scripts do ?
 - create-vod-hls.sh : creates a m3u8 playlist of multiple resolutions from a source video, 
 - cdn.js : our node.js app, i.e. it creates the HLS server, which uses the index.html for presentation and as a Video.js player.
 
-Modify the following lines with the correct addresses in the index.html:
+
+You need to modify the index.html page of the video service. In order to do so, do on your bash:
+```
+docker container exec -it server-hls /bin/bash
+```
+
+Inside this bash, open (with nano, for example) the file `index.html` and modify the following part with the correct addresses
 ```
      sources: [{
         src: 'http://<Cloud ip address>:8000/playlist.m3u8',
