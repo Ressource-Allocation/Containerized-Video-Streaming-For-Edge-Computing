@@ -43,7 +43,8 @@ To pull the server image (hosting the videos and statistics):
 docker run -d -p 8000:8000 organizededge/server-vod-hls
 ```
 
-Modify the following lines with the correct ip addresses:
+
+In the file `service.json` modify the following lines with the correct ip addresses:
 ```
      sources: [{
         src: 'http://<Cloud ip address>:8000/playlist.m3u8',
