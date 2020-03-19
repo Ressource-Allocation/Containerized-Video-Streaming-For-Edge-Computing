@@ -209,12 +209,20 @@ Final architecture should be like:
 ```
 The stats directory will hold the streaming statistics that we will analyze.
 
+***Watch videos on a client***
+
+**SET UP TESTBED CONFIGURATION**
+
+---
+***Limit bandwidth***
 You'll need to install wondershaper on your VM hosting the Cloud to limit the bandwidth;
 ```
 apt-get install wondershaper
 wondershaper <interface name> <upload speed> <download speed>
 ```
 We limit the outgoing speed of the VM hosting the Cloud server to emulate a limited bandwitdth between the Edge and Cloud nodes. 
+
+
 
 ---
 ***How to automate requests***
