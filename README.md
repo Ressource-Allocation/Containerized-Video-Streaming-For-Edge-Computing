@@ -251,6 +251,14 @@ At first run, you will be prompted to make Chrome your favorite web browser: cli
 
 --- 
 
+
+---
+**PREPARE THE DOCKERFILE MANUALLY**
+
+CHENGLONG
+
+So far, we have presented how you can use the Docker image `containerizededge/server-vod-hls` we have already prepared for you. If you just need to use that image, you can ignore this section. Instead,if you want to prepare the image yourself, you can follow the instruction on this section.
+
 **RESOURCES**
 All resources used in our project are their author propriety:
 - [Prob.js](https://github.com/bramp/prob.js/blob/master/prob.js)
